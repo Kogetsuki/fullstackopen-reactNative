@@ -1,3 +1,5 @@
+import { Platform } from 'react-native'
+
 const theme = {
   colors: {
     mainBackground: '#e1e4e8',
@@ -15,7 +17,11 @@ const theme = {
   },
 
   fonts: {
-    main: 'System'
+    main: Platform.select({
+      android: 'Roboto',
+      ios: 'Arial',
+      default: 'System'
+    })
   },
 
   fontSizes: {
@@ -57,12 +63,14 @@ theme.form = {
   buttonText: {
     color: theme.colors.textButton,
     fontWeight: theme.fontWeights.bold,
+    fontFamily: theme.fonts.main,
     padding: 15,
     textAlign: 'center',
   },
 
   errorText: {
-    color: theme.colors.error
+    color: theme.colors.error,
+    fontFamily: theme.fonts.main,
   },
 
   errorInput: {

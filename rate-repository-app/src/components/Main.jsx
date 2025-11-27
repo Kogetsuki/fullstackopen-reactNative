@@ -6,6 +6,7 @@ import theme from '../theme'
 import RepoList from './Repos/RepoList'
 import AppBar from './AppBar/AppBar'
 import SignIn from './SignIn'
+import Dev from './dev/Dev'
 
 
 const styles = StyleSheet.create({
@@ -25,6 +26,7 @@ const Main = () => {
       <Routes>
         <Route path='/' element={<RepoList />} />
         <Route path='/signin' element={<SignIn />} />
+        {/* <Route path='/dev' element={<Dev />} /> */}
         <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>
     </View>
