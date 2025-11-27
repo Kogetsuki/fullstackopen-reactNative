@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
 
   languageText: {
-    color: 'white',
+    color: theme.colors.textButton,
     fontWeight: theme.fontWeights.bold
   }
 })

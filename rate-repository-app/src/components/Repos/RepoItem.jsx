@@ -1,4 +1,7 @@
 import { View, StyleSheet, Text } from 'react-native'
+
+import theme from '../../theme'
+
 import RepoHeader from './RepoHeader'
 import RepoStats from './RepoStats'
 
@@ -6,7 +9,7 @@ import RepoStats from './RepoStats'
 const styles = StyleSheet.create({
   container: {
     padding: 15,
-    backgroundColor: 'white'
+    backgroundColor: theme.colors.formBackground
   }
 })
 
