@@ -35,7 +35,7 @@ const argsSchema = yup.object({
 });
 
 const orderColumnByOrderBy = {
-  CREATED_AT: 'createAt',
+  CREATED_AT: 'createdAt',
   RATING_AVERAGE: 'ratingAverage',
 };
 

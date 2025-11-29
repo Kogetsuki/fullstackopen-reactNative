@@ -8,7 +8,7 @@ import User from '../models/User';
 const jsonCacheKeyFn = (value) => JSON.stringify(value);
 
 const createModelLoader = (Model) => {
-  new DataLoader(
+  return new DataLoader(
     async (ids) => {
       const idColumns = isArray(Model.idColumn)
         ? Model.idColumn
@@ -97,7 +97,7 @@ const createUserReviewCountLoader = () =>
     return userIds.map((id) => {
       const review = reviews.find(({ userId }) => userId === id);
 
-      return review ? review.reviewsCount : 0;
+      return review ? review.reviewCount : 0;
     });
   });
 
