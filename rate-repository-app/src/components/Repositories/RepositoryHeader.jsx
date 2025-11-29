@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
 })
 
 
-const RepoHeader = ({ item }) => {
+const RepositoryHeader = ({ item }) => {
   return (
     <View style={styles.row}>
       {/* Profile picture */}
@@ -63,4 +63,4 @@ const RepoHeader = ({ item }) => {
   )
 }
 
-export default RepoHeader
+export default RepositoryHeader

@@ -3,6 +3,7 @@ import repositories from './repositories';
 
 const router = new Router();
 
-router.get('/repositories', repositories.routes());
+// Mount repositories router under /repositories
+router.use('/repositories', repositories.routes());
 
 export default router;

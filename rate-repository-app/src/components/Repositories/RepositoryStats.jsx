@@ -28,7 +28,7 @@ const formatCount = (count) =>
     : String(count)
 
 
-const RepoStats = ({ item }) => {
+const RepositoryStats = ({ item }) => {
   return (
     <View style={styles.row}>
       <View style={styles.item}>
@@ -55,4 +55,4 @@ const RepoStats = ({ item }) => {
 }
 
 
-export default RepoStats
+export default RepositoryStats

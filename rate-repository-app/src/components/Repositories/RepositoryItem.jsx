@@ -2,8 +2,8 @@ import { View, StyleSheet, Text } from 'react-native'
 
 import theme from '../../theme'
 
-import RepoHeader from './RepoHeader'
-import RepoStats from './RepoStats'
+import RepositoryHeader from './RepositoryHeader'
+import RepositoryStats from './RepositoryStats'
 
 
 const styles = StyleSheet.create({
@@ -14,14 +14,14 @@ const styles = StyleSheet.create({
 })
 
 
-const RepoItem = ({ repo }) => {
+const RepositoryItem = ({ repo }) => {
   return (
     <View style={styles.container}>
-      <RepoHeader item={repo} />
-      <RepoStats item={repo} />
+      <RepositoryHeader item={repo} />
+      <RepositoryStats item={repo} />
     </View>
   )
 }
 
 
-export default RepoItem
+export default RepositoryItem
