@@ -12,6 +12,6 @@ export const GET_REPOSITORIES = gql`
         }
       }
     }
-    ${REPOSITORY_DETAILS}
   }
+  ${REPOSITORY_DETAILS}
 `

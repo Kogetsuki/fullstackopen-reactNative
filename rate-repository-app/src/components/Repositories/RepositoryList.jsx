@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { FlatList, View, StyleSheet } from 'react-native'
 
 import useRepositories from '../../hooks/useRepositories'

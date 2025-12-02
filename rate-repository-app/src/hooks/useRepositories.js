@@ -1,16 +1,31 @@
-import { useQuery } from '@apollo/client'
-import { GET_REPOSITORIES } from '../graphql/queries'
+import { useState, useEffect } from 'react'
 
 
 const useRepositories = () => {
-  const { data, loading, refetch } = useQuery(GET_REPOSITORIES, {
-    fetchPolicy: 'cache-and-network'
-  })
+  const [repositories, setRepositories] = useState()
+  const [loading, setLoading] = useState(false)
+
+
+  const fetchRepositories = async () => {
+    setLoading(true)
+
+    const response = await fetch('https://paronymous-atmospheric-zenia.ngrok-free.dev/api/repositories')
+    const json = await response.json()
+
+    setLoading(false)
+    setRepositories(json)
+  }
+
+
+  useEffect(() => {
+    fetchRepositories()
+  }, [])
+
 
   return {
-    repositories: data ? data.repositories : undefined,
+    repositories,
     loading,
-    refetch
+    refetch: fetchRepositories
   }
 }
 
