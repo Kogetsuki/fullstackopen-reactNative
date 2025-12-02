@@ -1,9 +1,10 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client'
+import Constants from 'expo-constants'
 
 
 const createApolloClient = () =>
   new ApolloClient({
-    uri: 'https://paronymous-atmospheric-zenia.ngrok-free.dev/graphql',
+    uri: Constants.expoConfig.extra.APOLLO_URI,
     cache: new InMemoryCache()
   })
 
