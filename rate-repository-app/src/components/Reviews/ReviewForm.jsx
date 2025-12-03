@@ -1,9 +1,8 @@
 import { View, Text, TextInput, Pressable } from 'react-native'
 import { useFormik } from 'formik'
-import { useNavigate } from 'react-router-native'
 
 import theme from '../../theme'
-import useCreateReview from '../../hooks/useCreateReview'
+
 import {
   reviewValidationSchema,
   reviewInitialValues
@@ -16,7 +15,6 @@ export const ReviewForm = ({ onSubmit }) => {
     validationSchema: reviewValidationSchema,
     onSubmit
   })
-
 
   const ownerNameError = formik.touched.ownerName && formik.errors.ownerName
   const repositoryNameError = formik.touched.repositoryName && formik.errors.repositoryName
@@ -88,32 +86,4 @@ export const ReviewForm = ({ onSubmit }) => {
 }
 
 
-const Review = () => {
-  const [createReview] = useCreateReview()
-  const navigate = useNavigate()
-
-  const onSubmit = async (values) => {
-    const { ownerName, repositoryName, rating, text } = values
-
-    try {
-      const repositoryId = await createReview({
-        ownerName,
-        repositoryName,
-        rating: Number(rating),
-        text
-      })
-
-      console.log(`Successfully created review`)
-
-      navigate(`/${repositoryId}`)
-    }
-    catch (error) {
-      console.log(error)
-    }
-  }
-
-  return <ReviewForm onSubmit={onSubmit} />
-}
-
-
-export default Review
+export default ReviewForm
