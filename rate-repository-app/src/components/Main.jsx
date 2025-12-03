@@ -8,6 +8,7 @@ import RepositoryItemContainer from './Repositories/RepositoryItemContainer'
 import AppBar from './AppBar/AppBar'
 import SignIn from './SignIn'
 import Dev from './dev/Dev'
+import ReviewForm from './Reviews/ReviewForm'
 
 
 const styles = StyleSheet.create({
@@ -27,6 +28,7 @@ const Main = () => {
       <Routes>
         <Route path='/' element={<RepositoryList />} />
         <Route path='/:id' element={<RepositoryItemContainer />} />
+        <Route path='review' element={<ReviewForm />} />
         <Route path='/signin' element={<SignIn />} />
         {/* <Route path='/dev' element={<Dev />} /> */}
         <Route path='*' element={<Navigate to='/' replace />} />

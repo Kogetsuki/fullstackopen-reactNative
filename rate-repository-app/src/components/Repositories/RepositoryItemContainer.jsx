@@ -6,7 +6,7 @@ import theme from '../../theme'
 
 import { GET_REPOSITORY } from '../../graphql/queries'
 import RepositoryItem from './RepositoryItem'
-import ReviewItem from './ReviewItem'
+import ReviewItem from '../Reviews/ReviewItem'
 
 
 const styles = StyleSheet.create({

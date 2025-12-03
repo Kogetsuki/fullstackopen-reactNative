@@ -32,7 +32,10 @@ const AppBar = () => {
         <AppBarTab text='Repositories' to='/' />
 
         {isLogged ? (
-          <SignOut />
+          <>
+            <AppBarTab text='Create review' to='/review' />
+            <SignOut />
+          </>
         ) : (
           <AppBarTab text='Sign in' to='/signin' />
         )}
