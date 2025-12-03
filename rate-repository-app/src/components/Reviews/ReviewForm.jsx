@@ -1,8 +1,10 @@
 import { View, Text, TextInput, Pressable } from 'react-native'
 import * as yup from 'yup'
 import { useFormik } from 'formik'
+import { useNavigate } from 'react-router-native'
 
 import theme from '../../theme'
+import useCreateReview from '../../hooks/useCreateReview'
 
 
 const validationSchema = yup.object().shape({
@@ -21,7 +23,7 @@ const validationSchema = yup.object().shape({
     .max(100, 'Rating must be between 0 and 100')
     .required('Rating is required'),
 
-  review: yup
+  text: yup
     .string()
     .optional()
 })
@@ -31,7 +33,7 @@ const initialValues = {
   ownerName: '',
   repositoryName: '',
   rating: '',
-  review: ''
+  text: ''
 }
 
 
@@ -69,10 +71,9 @@ export const ReviewForm = ({ onSubmit }) => {
       <TextInput
         style={repositoryNameError ? theme.form.errorInput : theme.form.input}
         placeholder='Repository Name'
-        secureTextEntry
         value={formik.values.repositoryName}
         onChangeText={formik.handleChange('repositoryName')}
-        onBlur={formik.handleBlur('ownerName')}
+        onBlur={formik.handleBlur('repositoryName')}
       />
 
       {repositoryNameError && (
@@ -88,7 +89,7 @@ export const ReviewForm = ({ onSubmit }) => {
         keyboardType='numeric'
         value={formik.values.rating}
         onChangeText={formik.handleChange('rating')}
-        onBlur={formik.handleBlur('ownerName')}
+        onBlur={formik.handleBlur('rating')}
       />
 
       {ratingError && (
@@ -101,9 +102,9 @@ export const ReviewForm = ({ onSubmit }) => {
       <TextInput
         style={theme.form.input}
         placeholder='Review'
-        value={formik.values.review}
+        value={formik.values.text}
         multiline
-        onChangeText={formik.handleChange('review')}
+        onChangeText={formik.handleChange('text')}
       />
 
       <Pressable style={theme.form.button} onPress={formik.handleSubmit}>
@@ -114,6 +115,32 @@ export const ReviewForm = ({ onSubmit }) => {
 }
 
 
+const Review = () => {
+  const [createReview] = useCreateReview()
+  const navigate = useNavigate()
+
+  const onSubmit = async (values) => {
+    const { ownerName, repositoryName, rating, text } = values
+
+    try {
+      const repositoryId = await createReview({
+        ownerName,
+        repositoryName,
+        rating: Number(rating),
+        text
+      })
+
+      console.log(`Successfully created review`)
+
+      navigate(`/${repositoryId}`)
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
+
+  return <ReviewForm onSubmit={onSubmit} />
+}
 
 
-export default ReviewForm
+export default Review
