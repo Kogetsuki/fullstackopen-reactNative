@@ -24,3 +24,13 @@ export const ME = gql`
     }
   }
 `
+
+
+export const GET_REPOSITORY = gql`
+  query getRepository($id: ID!) {
+    repository(id: $id) {
+      ...RepositoryDetails
+    }
+  }
+  ${REPOSITORY_DETAILS}
+`

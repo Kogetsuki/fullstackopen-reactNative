@@ -1,5 +1,5 @@
 import { Text, TextInput, Pressable, View } from 'react-native'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-native'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 
