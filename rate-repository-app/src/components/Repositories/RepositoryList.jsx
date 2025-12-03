@@ -47,10 +47,15 @@ const RepositoryList = () => {
   const [search, setSearch] = useState('')
   const [debouncedSearch] = useDebounce(search, 500)
 
-  const { repositories } = useRepositories({
+  const { repositories, fetchMore } = useRepositories({
     ...ORDER_OPTIONS[order],
-    searchKeyword: debouncedSearch
+    searchKeyword: debouncedSearch,
+    first: 4
   })
+
+
+  const onEndReach = () =>
+    fetchMore()
 
 
   const repositoryNodes =
@@ -66,6 +71,8 @@ const RepositoryList = () => {
         ItemSeparatorComponent={ItemSeparator}
         keyExtractor={(item) => item.id}
         contentContainerStyle={{ paddingBottom: 150 }}
+        onEndReached={onEndReach}
+        onEndReachedThreshold={0.5}
 
         ListHeaderComponent={
           <>
