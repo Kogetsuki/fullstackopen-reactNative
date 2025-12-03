@@ -1,13 +1,11 @@
-import { gql } from '@apollo/client'
-
+import { gql } from '@apollo/client';
 
 export const USER_DETAILS = gql`
   fragment UserDetails on User {
     id
     username
   }
-`
-
+`;
 
 export const REVIEW_DETAILS = gql`
   fragment ReviewDetails on Review {
@@ -24,8 +22,7 @@ export const REVIEW_DETAILS = gql`
     }
   }
   ${USER_DETAILS}
-`
-
+`;
 
 export const REPOSITORY_DETAILS = gql`
   fragment RepositoryDetails on Repository {
@@ -41,13 +38,13 @@ export const REPOSITORY_DETAILS = gql`
     reviewCount
     ratingAverage
     url
-    reviews {
-      edges {
-        node {
-          ...ReviewDetails
-        }
-      }
-    }
   }
-  ${REVIEW_DETAILS}
-`
+`;
+
+export const PAGE_INFO_DETAILS = gql`
+  fragment PageInfoDetails on PageInfo {
+    startCursor
+    endCursor
+    hasNextPage
+  }
+`;

@@ -54,10 +54,6 @@ const RepositoryList = () => {
   })
 
 
-  const onEndReach = () =>
-    fetchMore()
-
-
   const repositoryNodes =
     repositories
       ? repositories.edges.map(edge => edge.node)
@@ -71,7 +67,7 @@ const RepositoryList = () => {
         ItemSeparatorComponent={ItemSeparator}
         keyExtractor={(item) => item.id}
         contentContainerStyle={{ paddingBottom: 150 }}
-        onEndReached={onEndReach}
+        onEndReached={fetchMore}
         onEndReachedThreshold={0.5}
 
         ListHeaderComponent={

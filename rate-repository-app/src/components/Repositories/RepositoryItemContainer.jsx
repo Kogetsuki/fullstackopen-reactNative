@@ -1,10 +1,11 @@
-import { FlatList, Text, StyleSheet, View } from 'react-native'
+import { FlatList, StyleSheet, View } from 'react-native'
 import { useQuery } from '@apollo/client'
 import { useParams } from 'react-router-native'
 
 import theme from '../../theme'
 
 import { GET_REPOSITORY } from '../../graphql/queries'
+import useRepository from '../../hooks/useRepository'
 
 import RepositoryItem from './RepositoryItem'
 import ReviewItem from '../Reviews/ReviewItem'
@@ -31,19 +32,15 @@ const ItemSeparator = () =>
 const RepositoryItemContainer = () => {
   const { id } = useParams()
 
-  const { data, loading, error } = useQuery(GET_REPOSITORY, {
-    variables: { id }
-  })
+  const { repository, fetchMore, loading, error } = useRepository(id, 3)
 
   if (loading || error)
     return <LoadingError loading={loading} error={error} />
 
 
-  const repo = data?.repository
-
   const reviews =
-    repo
-      ? repo.reviews.edges.map(edge => edge.node)
+    repository
+      ? repository.reviews.edges.map(edge => edge.node)
       : []
 
 
@@ -53,8 +50,14 @@ const RepositoryItemContainer = () => {
         data={reviews}
         ItemSeparatorComponent={ItemSeparator}
         keyExtractor={({ id }) => id}
-        ListHeaderComponent={() => <RepositoryItem repo={repo} showGitHubButton={true} />}
-        renderItem={({ item }) => <ReviewItem review={item} />}
+        onEndReached={fetchMore}
+        onEndReachedThreshold={0.5}
+
+        ListHeaderComponent={() =>
+          <RepositoryItem repo={repository} showGitHubButton={true} />}
+
+        renderItem={({ item }) =>
+          <ReviewItem review={item} />}
       />
     </View>
   )
