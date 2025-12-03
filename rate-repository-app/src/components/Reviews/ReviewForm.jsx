@@ -1,46 +1,19 @@
 import { View, Text, TextInput, Pressable } from 'react-native'
-import * as yup from 'yup'
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-native'
 
 import theme from '../../theme'
 import useCreateReview from '../../hooks/useCreateReview'
-
-
-const validationSchema = yup.object().shape({
-  ownerName: yup
-    .string()
-    .required('Repository owner\'s name is required'),
-
-  repositoryName: yup
-    .string()
-    .required('Repository name is required'),
-
-  rating: yup
-    .number()
-    .typeError('Rating must be a number')
-    .min(0, 'Rating must be between 0 and 100')
-    .max(100, 'Rating must be between 0 and 100')
-    .required('Rating is required'),
-
-  text: yup
-    .string()
-    .optional()
-})
-
-
-const initialValues = {
-  ownerName: '',
-  repositoryName: '',
-  rating: '',
-  text: ''
-}
+import {
+  reviewValidationSchema,
+  reviewInitialValues
+} from '../../yup/ReviewValidation'
 
 
 export const ReviewForm = ({ onSubmit }) => {
   const formik = useFormik({
-    initialValues,
-    validationSchema,
+    initialValues: reviewInitialValues,
+    validationSchema: reviewValidationSchema,
     onSubmit
   })
 

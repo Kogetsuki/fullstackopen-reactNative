@@ -1,33 +1,21 @@
 import { Text, TextInput, Pressable, View } from 'react-native'
 import { useNavigate } from 'react-router-native'
 import { useFormik } from 'formik'
-import * as yup from 'yup'
 
 import theme from '../../theme'
 import useSignIn from '../../hooks/useSignIn'
 
+import {
+  signInInitialValues,
+  signInValidationSchema
+} from '../../yup/SignInValidation'
 
-const validationSchema = yup.object().shape({
-  username: yup
-    .string()
-    .required('Username is required'),
-
-  password: yup
-    .string()
-    .required('Password is required')
-})
-
-
-const initialValues = {
-  username: '',
-  password: ''
-}
 
 
 export const SignInForm = ({ onSubmit }) => {
   const formik = useFormik({
-    initialValues,
-    validationSchema,
+    initialValues: signInInitialValues,
+    validationSchema: signInValidationSchema,
     onSubmit
   })
 
