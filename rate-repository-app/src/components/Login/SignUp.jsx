@@ -26,6 +26,7 @@ const SignUp = () => {
     }
   }
 
+
   return <SignUpForm onSubmit={onSubmit} />
 }
 

@@ -13,12 +13,13 @@ const SignIn = () => {
 
     try {
       const data = await signIn({ username, password })
-      console.log(`Sign in successful ${data}`)
+      console.log('Sign in successful')
 
       navigate('/')
     }
     catch (error) {
-      console.log(error)
+      console.error('Sign in failed:', error.message || error)
+      throw error
     }
   }
 

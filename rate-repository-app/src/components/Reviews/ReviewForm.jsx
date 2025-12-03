@@ -1,7 +1,8 @@
-import { View, Text, TextInput, Pressable } from 'react-native'
+import { View, Text, Pressable } from 'react-native'
 import { useFormik } from 'formik'
 
 import theme from '../../theme'
+import FormInput from '../utils/FormInput'
 
 import {
   reviewValidationSchema,
@@ -23,59 +24,36 @@ export const ReviewForm = ({ onSubmit }) => {
 
   return (
     <View style={theme.form.container}>
-      {/* Owner Name */}
-      <TextInput
-        style={ownerNameError ? theme.form.errorInput : theme.form.input}
+      <FormInput
         placeholder='Repository owner name'
         value={formik.values.ownerName}
+        error={ownerNameError}
         onChangeText={formik.handleChange('ownerName')}
         onBlur={formik.handleBlur('ownerName')}
       />
 
-      {ownerNameError && (
-        <Text style={theme.form.errorText}>
-          {formik.errors.ownerName}
-        </Text>
-      )}
-
-      {/* Repo Name */}
-      <TextInput
-        style={repositoryNameError ? theme.form.errorInput : theme.form.input}
+      <FormInput
         placeholder='Repository Name'
         value={formik.values.repositoryName}
+        error={repositoryNameError}
         onChangeText={formik.handleChange('repositoryName')}
         onBlur={formik.handleBlur('repositoryName')}
       />
 
-      {repositoryNameError && (
-        <Text style={theme.form.errorText}>
-          {formik.errors.repositoryName}
-        </Text>
-      )}
-
-      {/* Rating */}
-      <TextInput
-        style={ratingError ? theme.form.errorInput : theme.form.input}
+      <FormInput
         placeholder='Rating (0 - 100)'
-        keyboardType='numeric'
         value={formik.values.rating}
+        error={ratingError}
+        keyboardType='numeric'
         onChangeText={formik.handleChange('rating')}
         onBlur={formik.handleBlur('rating')}
       />
 
-      {ratingError && (
-        <Text style={theme.form.errorText}>
-          {formik.errors.rating}
-        </Text>
-      )}
-
-      {/* Review */}
-      <TextInput
-        style={theme.form.input}
+      <FormInput
         placeholder='Review'
         value={formik.values.text}
-        multiline
         onChangeText={formik.handleChange('text')}
+        multiline
       />
 
       <Pressable style={theme.form.button} onPress={formik.handleSubmit}>

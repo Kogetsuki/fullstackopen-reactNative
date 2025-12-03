@@ -13,10 +13,16 @@ const SignOut = () => {
 
   const handleSignOut = async () => {
     console.log('Signing out')
-    await authStorage.removeAccessToken()
-    await apolloClient.resetStore()
 
-    navigate('/signin')
+    try {
+      await authStorage.removeAccessToken()
+      await apolloClient.resetStore()
+
+      navigate('/signin')
+    }
+    catch (error) {
+      console.error('Sign out failed:', error)
+    }
   }
 
 

@@ -5,8 +5,10 @@ import { useParams } from 'react-router-native'
 import theme from '../../theme'
 
 import { GET_REPOSITORY } from '../../graphql/queries'
+
 import RepositoryItem from './RepositoryItem'
 import ReviewItem from '../Reviews/ReviewItem'
+import LoadingError from '../utils/LoadingError'
 
 
 const styles = StyleSheet.create({
@@ -33,11 +35,8 @@ const RepositoryItemContainer = () => {
     variables: { id }
   })
 
-  if (loading)
-    return <Text>Loading...</Text>
-
-  if (error)
-    return <Text>Error: {error.message}</Text>
+  if (loading || error)
+    return <LoadingError loading={loading} error={error} />
 
 
   const repo = data?.repository

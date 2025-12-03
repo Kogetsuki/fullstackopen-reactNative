@@ -1,8 +1,9 @@
-import { Text, TextInput, Pressable, View } from 'react-native'
+import { Text, Pressable, View } from 'react-native'
 import { useFormik } from 'formik'
 
 import theme from '../../theme'
 
+import FormInput from '../utils/FormInput'
 import {
   signInInitialValues,
   signInValidationSchema
@@ -22,34 +23,22 @@ const SignInForm = ({ onSubmit }) => {
 
   return (
     <View style={theme.form.container}>
-      {/* Username */}
-      <TextInput
-        style={usernameError ? theme.form.errorInput : theme.form.input}
+      <FormInput
         placeholder='Username'
         value={formik.values.username}
+        error={usernameError}
         onChangeText={formik.handleChange('username')}
+        onBlur={formik.handleBlur('username')}
       />
 
-      {usernameError && (
-        <Text style={theme.form.errorText}>
-          {formik.errors.username}
-        </Text>
-      )}
-
-      {/* Password */}
-      <TextInput
-        style={passwordError ? theme.form.errorInput : theme.form.input}
+      <FormInput
         placeholder='Password'
-        secureTextEntry
         value={formik.values.password}
+        error={passwordError}
         onChangeText={formik.handleChange('password')}
+        onBlur={formik.handleBlur('password')}
+        secureTextEntry
       />
-
-      {passwordError && (
-        <Text style={theme.form.errorText}>
-          {formik.errors.password}
-        </Text>
-      )}
 
       <Pressable style={theme.form.button} onPress={formik.handleSubmit}>
         <Text style={theme.form.buttonText}>Sign in</Text>

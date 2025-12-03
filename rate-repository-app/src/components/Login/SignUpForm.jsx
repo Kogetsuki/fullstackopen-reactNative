@@ -1,8 +1,9 @@
-import { Text, TextInput, Pressable, View } from 'react-native'
+import { Text, Pressable, View } from 'react-native'
 import { useFormik } from 'formik'
 
 import theme from '../../theme'
 
+import FormInput from '../FormInput'
 import {
   signUpValidation,
   signUpInitialValues
@@ -24,48 +25,33 @@ const SignUpForm = ({ onSubmit }) => {
   return (
     <View style={theme.form.container}>
       {/* Username */}
-      <TextInput
-        style={usernameError ? theme.form.errorInput : theme.form.input}
+      <FormInput
         placeholder='Username'
         value={formik.values.username}
+        error={usernameError}
         onChangeText={formik.handleChange('username')}
+        onBlur={formik.handleBlur('username')}
       />
-
-      {usernameError && (
-        <Text style={theme.form.errorText}>
-          {formik.errors.username}
-        </Text>
-      )}
 
       {/* Password */}
-      <TextInput
-        style={passwordError ? theme.form.errorInput : theme.form.input}
+      <FormInput
         placeholder='Password'
-        secureTextEntry
         value={formik.values.password}
+        error={passwordError}
         onChangeText={formik.handleChange('password')}
+        onBlur={formik.handleBlur('password')}
+        secureTextEntry
       />
-
-      {passwordError && (
-        <Text style={theme.form.errorText}>
-          {formik.errors.password}
-        </Text>
-      )}
 
       {/* Password Confirmation */}
-      <TextInput
-        style={passwordConfirmationError ? theme.form.errorInput : theme.form.input}
+      <FormInput
         placeholder='Password Confirmation'
-        secureTextEntry
         value={formik.values.passwordConfirmation}
+        error={passwordConfirmationError}
         onChangeText={formik.handleChange('passwordConfirmation')}
+        onBlur={formik.handleBlur('passwordConfirmation')}
+        secureTextEntry
       />
-
-      {passwordConfirmationError && (
-        <Text style={theme.form.errorText}>
-          {formik.errors.passwordConfirmation}
-        </Text>
-      )}
 
       <Pressable style={theme.form.button} onPress={formik.handleSubmit}>
         <Text style={theme.form.buttonText}>Sign up</Text>
