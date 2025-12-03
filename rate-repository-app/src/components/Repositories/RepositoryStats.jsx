@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
   },
 
   value: {
+    alignSelf: 'center',
     fontWeight: theme.fontWeights.bold
   },
 
