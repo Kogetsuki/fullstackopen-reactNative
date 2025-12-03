@@ -1,5 +1,7 @@
-import { FlatList, View, StyleSheet, Pressable } from 'react-native'
+import { useState } from 'react'
+import { FlatList, View, StyleSheet, Pressable, Text } from 'react-native'
 import { useNavigate } from 'react-router-native'
+import { Picker } from '@react-native-picker/picker'
 
 import useRepositories from '../../hooks/useRepositories'
 import RepositoryItem from './RepositoryItem'
@@ -16,6 +18,27 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.mainBackground,
     flex: 1,
     paddingTop: 15
+  },
+
+  pickerContainer: {
+    backgroundColor: '#fff',
+    marginHorizontal: 15,
+    marginBottom: 10,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    overflow: 'hidden'
+  },
+
+  picker: {
+    height: 50,
+    width: '100%'
+  },
+
+  pickerLabel: {
+    fontSize: 16,
+    paddingHorizontal: 10,
+    paddingVertical: 5
   }
 })
 
@@ -24,8 +47,39 @@ const ItemSeparator = () =>
   <View style={styles.separator} />
 
 
-export const RepositoryListContainer = ({ repositories }) => {
+const ORDER_OPTIONS = {
+  LATEST: { orderBy: 'CREATED_AT', orderDirection: 'DESC', label: 'Latest repositories' },
+  HIGHEST: { orderBy: 'RATING_AVERAGE', orderDirection: 'DESC', label: 'Highest rated repositories' },
+  LOWEST: { orderBy: 'RATING_AVERAGE', orderDirection: 'ASC', label: 'Lowest rated repositories' }
+}
+
+
+const OrderPicker = ({ order, setOrder }) => (
+  <View style={styles.pickerContainer}>
+    <Picker
+      style={styles.picker}
+      selectedValue={order ?? null}
+      onValueChange={(value) =>
+        setOrder(value)}
+    >
+      {/* Placeholder label */}
+      <Picker.Item label='Sort by...' value={null} enabled={false} color='#888' />
+
+      {/* Actual options */}
+      {Object.entries(ORDER_OPTIONS).map(([key, { label }]) => (
+        <Picker.Item key={key} label={label} value={key} />
+      ))}
+    </Picker>
+  </View>
+)
+
+
+const RepositoryList = () => {
   const navigate = useNavigate()
+  const [order, setOrder] = useState('LATEST')
+
+  const { repositories } = useRepositories(ORDER_OPTIONS[order])
+
 
   const repositoryNodes =
     repositories
@@ -39,6 +93,11 @@ export const RepositoryListContainer = ({ repositories }) => {
         data={repositoryNodes}
         ItemSeparatorComponent={ItemSeparator}
         keyExtractor={(item) => item.id}
+
+        ListHeaderComponent={
+          <OrderPicker order={order} setOrder={setOrder} />
+        }
+
         renderItem={({ item }) => (
           <Pressable onPress={() => navigate(`/${item.id}`)}>
             <RepositoryItem repo={item} />
@@ -47,13 +106,6 @@ export const RepositoryListContainer = ({ repositories }) => {
       />
     </View>
   )
-}
-
-
-const RepositoryList = () => {
-  const { repositories } = useRepositories()
-
-  return <RepositoryListContainer repositories={repositories} />
 }
 
 
