@@ -3,7 +3,7 @@ import { useFormik } from 'formik'
 
 import theme from '../../theme'
 
-import FormInput from '../FormInput'
+import FormInput from '../utils/FormInput'
 import {
   signUpValidation,
   signUpInitialValues

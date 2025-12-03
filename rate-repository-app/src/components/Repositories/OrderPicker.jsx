@@ -1,4 +1,5 @@
-import { View, StyleSheet, Picker } from 'react-native'
+import { View, StyleSheet } from 'react-native'
+import { Picker } from '@react-native-picker/picker'
 import ORDER_OPTIONS from '../../constants/orderOptions'
 
 
