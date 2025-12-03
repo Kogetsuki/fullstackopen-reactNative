@@ -18,6 +18,10 @@ export const REVIEW_DETAILS = gql`
     user {
       ...UserDetails
     }
+    repository {
+      id
+      fullName
+    }
   }
   ${USER_DETAILS}
 `
@@ -28,6 +32,7 @@ export const REPOSITORY_DETAILS = gql`
     id
     fullName
     name
+    createdAt
     ownerAvatarUrl
     description
     language

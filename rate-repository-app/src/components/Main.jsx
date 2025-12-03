@@ -8,6 +8,7 @@ import SignIn from './Login/SignIn'
 import SignUp from './Login/SignUp'
 import RepositoryList from './Repositories/RepositoryList'
 import RepositoryItemContainer from './Repositories/RepositoryItemContainer'
+import MyReviews from './Reviews/MyReviews'
 import ReviewForm from './Reviews/ReviewForm'
 import Dev from './dev/Dev'
 
@@ -29,9 +30,10 @@ const Main = () => {
       <Routes>
         <Route path='/' element={<RepositoryList />} />
         <Route path='/:id' element={<RepositoryItemContainer />} />
-        <Route path='review' element={<ReviewForm />} />
-        <Route path='/signin' element={<SignIn />} />
-        <Route path='/signup' element={<SignUp />} />
+        <Route path='/createReview' element={<ReviewForm />} />
+        <Route path='/myReviews' element={<MyReviews />} />
+        <Route path='/signIn' element={<SignIn />} />
+        <Route path='/signUp' element={<SignUp />} />
         {/* <Route path='/dev' element={<Dev />} /> */}
         <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>

@@ -18,7 +18,7 @@ const SignOut = () => {
       await authStorage.removeAccessToken()
       await apolloClient.resetStore()
 
-      navigate('/signin')
+      navigate('/signUp')
     }
     catch (error) {
       console.error('Sign out failed:', error)

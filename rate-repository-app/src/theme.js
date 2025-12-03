@@ -9,6 +9,7 @@ const theme = {
     textSecondary: '#586069',
     textButton: '#ffffff',
     primary: '#0366d6',
+    secondary: "#df3b3b",
 
     appBarBackground: '#24292e',
     appBarText: '#ffffff',

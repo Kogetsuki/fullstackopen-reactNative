@@ -33,13 +33,14 @@ const AppBar = () => {
 
         {isLogged ? (
           <>
-            <AppBarTab text='Create review' to='/review' />
+            <AppBarTab text='Create review' to='/createReview' />
+            <AppBarTab text='My reviews' to='/myReviews' />
             <SignOut />
           </>
         ) : (
           <>
-            <AppBarTab text='Sign in' to='/signin' />
-            <AppBarTab text='Sign up' to='/signup' />
+            <AppBarTab text='Sign in' to='/signIn' />
+            <AppBarTab text='Sign up' to='/signUp' />
           </>
         )}
         {/* <AppBarTab text='Dev' to='/dev' /> */}
