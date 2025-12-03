@@ -1,8 +1,8 @@
 import { useApolloClient } from '@apollo/client'
 import { useNavigate } from 'react-router-native'
 
-import useAuthStorage from '../hooks/useAuthStorage'
-import AppBarTab from './AppBar/AppBarTab'
+import useAuthStorage from '../../hooks/useAuthStorage'
+import AppBarTab from '../AppBar/AppBarTab'
 
 
 const SignOut = () => {

@@ -3,12 +3,12 @@ import { Route, Routes, Navigate } from 'react-router-native'
 
 import theme from '../theme'
 
+import AppBar from './AppBar/AppBar'
+import SignIn from './Login/SignIn'
 import RepositoryList from './Repositories/RepositoryList'
 import RepositoryItemContainer from './Repositories/RepositoryItemContainer'
-import AppBar from './AppBar/AppBar'
-import SignIn from './SignIn'
-import Dev from './dev/Dev'
 import ReviewForm from './Reviews/ReviewForm'
+import Dev from './dev/Dev'
 
 
 const styles = StyleSheet.create({

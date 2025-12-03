@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-native'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 
-import theme from '../theme'
-import useSignIn from '../hooks/useSignIn'
+import theme from '../../theme'
+import useSignIn from '../../hooks/useSignIn'
 
 
 const validationSchema = yup.object().shape({

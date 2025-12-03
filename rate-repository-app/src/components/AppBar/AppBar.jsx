@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/client'
 import { ME } from '../../graphql/queries'
 import theme from '../../theme'
 import AppBarTab from './AppBarTab'
-import SignOut from '../SignOut'
+import SignOut from '../Login/SignOut'
 
 
 const styles = StyleSheet.create({
