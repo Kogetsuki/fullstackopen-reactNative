@@ -3,6 +3,8 @@ import react from "eslint-plugin-react";
 import reactNative from "eslint-plugin-react-native";
 import babelParser from "@babel/eslint-parser";
 import globals from "globals";
+import jest from 'eslint-plugin-jest'
+
 
 export default [
   {
@@ -28,6 +30,7 @@ export default [
         ...globals.browser,
         ...globals.node,
         ...reactNative.environments["react-native"].globals,
+        ...jest.environments.globals,
       },
     },
 
@@ -40,11 +43,13 @@ export default [
     plugins: {
       react,
       "react-native": reactNative,
+      jest
     },
 
     rules: {
       ...js.configs.recommended.rules,
       ...react.configs.recommended.rules,
+      ...jest.configs.recommended.rules,
 
       "react/prop-types": "off",
       "react/react-in-jsx-scope": "off",
