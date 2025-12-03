@@ -23,10 +23,7 @@ const ItemSeparator = () =>
   <View style={styles.separator} />
 
 
-const RepositoryList = () => {
-  const { repositories } = useRepositories()
-
-
+export const RepositoryListContainer = ({ repositories }) => {
   // Get nodes from edges array
   const repositoryNodes =
     repositories
@@ -44,6 +41,13 @@ const RepositoryList = () => {
       />
     </View>
   )
+}
+
+
+const RepositoryList = () => {
+  const { repositories } = useRepositories()
+
+  return <RepositoryListContainer repositories={repositories} />
 }
 
 
