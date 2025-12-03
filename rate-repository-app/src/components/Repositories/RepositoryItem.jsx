@@ -10,7 +10,8 @@ import RepositoryStats from './RepositoryStats'
 const styles = StyleSheet.create({
   container: {
     padding: 15,
-    backgroundColor: theme.colors.formBackground
+    backgroundColor: theme.colors.formBackground,
+    marginBottom: 10
   }
 })
 
