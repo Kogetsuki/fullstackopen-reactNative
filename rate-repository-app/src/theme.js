@@ -28,7 +28,7 @@ const theme = {
     body: 14,
     subheading: 16,
 
-    appBarText: 20
+    appBarText: 18
   },
 
   fontWeights: {

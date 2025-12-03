@@ -1,7 +1,9 @@
 import { useState } from 'react'
-import { FlatList, View, StyleSheet, Pressable, Text } from 'react-native'
+import { FlatList, View, StyleSheet, Pressable } from 'react-native'
 import { useNavigate } from 'react-router-native'
 import { Picker } from '@react-native-picker/picker'
+import { SearchBar } from 'react-native-elements'
+import { useDebounce } from 'use-debounce'
 
 import useRepositories from '../../hooks/useRepositories'
 import RepositoryItem from './RepositoryItem'
@@ -20,19 +22,9 @@ const styles = StyleSheet.create({
     paddingTop: 15
   },
 
-  pickerContainer: {
-    backgroundColor: '#fff',
-    marginHorizontal: 15,
-    marginBottom: 10,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    overflow: 'hidden'
-  },
-
   picker: {
-    height: 50,
-    width: '100%'
+    width: '100%',
+    marginBottom: 10
   },
 
   pickerLabel: {
@@ -55,7 +47,7 @@ const ORDER_OPTIONS = {
 
 
 const OrderPicker = ({ order, setOrder }) => (
-  <View style={styles.pickerContainer}>
+  <View>
     <Picker
       style={styles.picker}
       selectedValue={order ?? null}
@@ -76,9 +68,15 @@ const OrderPicker = ({ order, setOrder }) => (
 
 const RepositoryList = () => {
   const navigate = useNavigate()
-  const [order, setOrder] = useState('LATEST')
 
-  const { repositories } = useRepositories(ORDER_OPTIONS[order])
+  const [order, setOrder] = useState('LATEST')
+  const [search, setSearch] = useState('')
+  const [debouncedSearch] = useDebounce(search, 500)
+
+  const { repositories } = useRepositories({
+    ...ORDER_OPTIONS[order],
+    searchKeyword: debouncedSearch
+  })
 
 
   const repositoryNodes =
@@ -88,14 +86,28 @@ const RepositoryList = () => {
 
 
   return (
-    <View style={styles.container}>
+    <View>
       <FlatList
         data={repositoryNodes}
         ItemSeparatorComponent={ItemSeparator}
         keyExtractor={(item) => item.id}
+        contentContainerStyle={{ paddingBottom: 150 }}
 
         ListHeaderComponent={
-          <OrderPicker order={order} setOrder={setOrder} />
+          <>
+            <SearchBar
+              placeholder='Filter'
+              onChangeText={setSearch}
+              value={search}
+              lightTheme
+              round
+            />
+
+            <OrderPicker
+              order={order}
+              setOrder={setOrder}
+            />
+          </>
         }
 
         renderItem={({ item }) => (
